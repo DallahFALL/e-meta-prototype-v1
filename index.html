@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-META Prototype</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <img src="logo-eMETA.png" alt="Logo e-META" />
+    <h1 data-i18n="title">Plateforme de micro-crédit mobile</h1>
+    <select id="language-selector">
+      <option value="fr">FR</option>
+      <option value="en">EN</option>
+      <option value="es">ES</option>
+      <option value="ar">AR</option>
+    </select>
+  </header>
+
+  <form id="meta-form">
+    <label data-i18n="name">Nom complet :</label>
+    <input type="text" name="name" required />
+
+    <label data-i18n="phone">Téléphone :</label>
+    <input type="tel" name="phone" required />
+
+    <label data-i18n="product">Produit Orange vendu :</label>
+    <input type="text" name="product" required />
+
+    <label data-i18n="amount">Montant souhaité :</label>
+    <input type="number" name="amount" min="500" required />
+
+    <button type="submit" data-i18n="submit">Soumettre la demande</button>
+  </form>
+
+  <footer>
+    <a href="privacy.html" data-i18n="privacy">Politique de confidentialité</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
