@@ -1,0 +1,83 @@
+/* Reset de base */
+body, h1, label, input, select, button, a {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Fond et structure */
+body {
+  background-color: #f7f9fc;
+  color: #333;
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* En-tête */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header img {
+  max-width: 120px;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+/* Sélecteur de langue */
+#language-selector {
+  padding: 8px;
+  font-size: 1em;
+  margin-top: 5px;
+}
+
+/* Formulaire */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Bouton */
+button {
+  padding: 12px;
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+button:hover {
+  background-color: #005ea6;
+}
+
+/* Pied de page */
+footer {
+  margin-top: 30px;
+  text-align: center;
+}
+
+footer a {
+  color: #0078d7;
+  text-decoration: none;
+  font-size: 0.9em;
+}
