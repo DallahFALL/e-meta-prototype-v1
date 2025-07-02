@@ -1,69 +1,42 @@
-// Traductions de l’interface
+// Définitions des traductions
 const translations = {
-  fr: {
-    title: "Plateforme de micro-crédit mobile",
-    name: "Nom complet :",
-    phone: "Téléphone :",
-    product: "Produit Orange vendu :",
-    amount: "Montant souhaité :",
-    submit: "Soumettre la demande",
-    privacy: "Politique de confidentialité"
-  },
-  en: {
-    title: "Mobile Microcredit Platform",
-    name: "Full name:",
-    phone: "Phone number:",
-    product: "Orange product sold:",
-    amount: "Requested amount:",
-    submit: "Submit request",
-    privacy: "Privacy policy"
-  },
-  es: {
-    title: "Plataforma de microcrédito móvil",
-    name: "Nombre completo:",
-    phone: "Teléfono:",
-    product: "Producto de Orange vendido:",
-    amount: "Monto solicitado:",
-    submit: "Enviar solicitud",
-    privacy: "Política de privacidad"
-  },
-  ar: {
-    title: "منصة التمويل الصغير عبر الهاتف",
-    name: "الاسم الكامل:",
-    phone: "رقم الهاتف:",
-    product: "منتج Orange المُباع:",
-    amount: "المبلغ المطلوب:",
-    submit: "إرسال الطلب",
-    privacy: "سياسة الخصوصية"
-  }
+  fr: { /* … comme avant … */ },
+  en: { /* … */ },
+  es: { /* … */ },
+  ar: { /* … */ }
 };
 
-// Gestion du changement de langue
-document.getElementById("language-selector").addEventListener("change", (e) => {
-  const lang = e.target.value;
-  const elements = document.querySelectorAll("[data-i18n]");
-  elements.forEach((el) => {
-    const key = el.getAttribute("data-i18n");
-    el.textContent = translations[lang][key];
+// Appliquer la langue choisie
+function applyLang(lang) {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.textContent = translations[lang][ el.dataset.i18n ];
   });
-});
+}
 
-// Gestion du formulaire
-document.getElementById("meta-form").addEventListener("submit", function(e) {
-  e.preventDefault();
+// Init
+document.addEventListener("DOMContentLoaded", () => {
+  const langSel = document.getElementById("language-selector");
+  langSel.addEventListener("change", () => applyLang(langSel.value));
+  applyLang(langSel.value);
 
-  // Récupération des données
-  const formData = new FormData(this);
-  const data = {
-    name: formData.get("name"),
-    phone: formData.get("phone"),
-    product: formData.get("product"),
-    amount: formData.get("amount")
-  };
+  // Submit
+  document.getElementById("decision-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const params = new URLSearchParams();
+    for (let [k,v] of data) params.append(k, v);
 
-  // Log des données (à remplacer par un envoi vers Google Sheets ou API)
-  console.log("Formulaire soumis :", data);
-
-  alert("Votre demande a été envoyée avec succès !");
-  this.reset();
+    try {
+      const res = await fetch("VOTRE_APPS_SCRIPT_URL", {
+        method: "POST",
+        body: params
+      });
+      const text = await res.text();
+      alert(text);
+      e.target.reset();
+    } catch (err) {
+      console.error(err);
+      alert("Erreur d'envoi. Réessaie plus tard.");
+    }
+  });
 });
