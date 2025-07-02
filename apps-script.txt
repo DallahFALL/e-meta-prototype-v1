@@ -1,0 +1,18 @@
+function doPost(e) {
+  var sheet = SpreadsheetApp.openById("VOTRE_ID_FEUILLE")
+              .getSheetByName("FormResponses");
+
+  var data = [
+    new Date(),
+    e.parameter.name,
+    e.parameter.phone,
+    e.parameter.product,
+    e.parameter.amount
+  ];
+
+  sheet.appendRow(data);
+
+  return ContentService
+    .createTextOutput("Demande enregistrée avec succès")
+    .setMimeType(ContentService.MimeType.TEXT);
+}
