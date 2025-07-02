@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-META – Assistant IA</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --primary: #005ea6;
+      --bg: #f5f7fa;
+      --card: #fff;
+      --text: #333;
+      --radius: 8px;
+      --spacing: 1rem;
+      --font: "Segoe UI", Roboto, sans-serif;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      padding: var(--spacing);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    header img {
+      max-width: 160px;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+    header p {
+      font-size: 1.05rem;
+    }
+    select#language-selector {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      border-radius: var(--radius);
+      font-size: 1rem;
+    }
+    fieldset {
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      padding: var(--spacing);
+      margin-bottom: var(--spacing);
+    }
+    legend {
+      font-weight: bold;
+      padding: 0 0.5rem;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: var(--radius);
+    }
+    .budget-group {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .budget-group input {
+      flex: 2;
+    }
+    .budget-group select {
+      flex: 1;
+    }
+    .criteria-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .criteria-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    input[type="checkbox"], input[type="radio"] {
+      width: auto;
+    }
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9em;
+    }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    @media(max-width: 600px) {
+      header h1 { font-size: 1.5rem; }
+      .container { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="01_Logo_Sources/eMETA-official-logo.png" alt="e-META Logo" height="100" />
+      <h1>e-META – ASSISTANT IA d'Aide à la Décision</h1>
+      <p><strong>Prenez vos décisions stratégiques</strong></p>
+      <p><em>Simplement. Intelligemment.</em></p>
+      <label for="language-selector">Langue :</label>
+      <select id="language-selector">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="ar">AR</option>
+      </select>
+    </header>
+
+    <form id="decision-form">
+      <fieldset>
+        <legend>1. Informations Générales</legend>
+        <label for="fullname">Nom et Prénom *</label>
+        <input type="text" name="fullname" id="fullname" required />
+
+        <label for="email">Email *</label>
+        <input type="email" name="email" id="email" required />
+
+        <label for="phone">Téléphone / WhatsApp</label>
+        <input type="tel" name="phone" id="phone" />
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Contexte et Objectif</legend>
+        <label for="title">Titre de la décision</label>
+        <input type="text" name="title" id="title" />
+
+        <label for="context">Description du contexte</label>
+        <textarea name="context" id="context" rows="3"></textarea>
+
+        <label for="resources">Ressources disponibles</label>
+        <textarea name="resources" id="resources" rows="2"></textarea>
+
+        <label>Budget approximatif</label>
+        <div class="budget-group">
+          <input type="number" name="budget" placeholder="Montant" />
+          <select name="currency">
+            <option value="XOF">FCFA (XOF)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="USD">Dollar (USD)</option>
+            <option value="GBP">Livre (GBP)</option>
+            <option value="CNY">Yuan (CNY)</option>
+          </select>
+        </div>
+
+        <label for="team_size">Taille de l'équipe</label>
+        <input type="number" name="team_size" id="team_size" />
+
+        <label for="tools">Outils / technologies en place</label>
+        <textarea name="tools" id="tools" rows="2"></textarea>
+
+        <label for="constraints">Contraintes & Risques connus</label>
+        <textarea name="constraints" id="constraints" rows="2"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Analyse et Critères</legend>
+        <label>Critères de succès :</label>
+        <div class="criteria-group">
+          <label><input type="checkbox" name="criteria" value="rentabilite" /> Rentabilité</label>
+          <label><input type="checkbox" name="criteria" value="rapidite" /> Rapidité</label>
+          <label><input type="checkbox" name="criteria" value="impact" /> Impact social</label>
+          <label><input type="checkbox" name="criteria" value="durabilite" /> Durabilité</label>
+          <label><input type="checkbox" name="criteria" value="autre" /> Autre</label>
+        </div>
+
+        <label for="priority">Priorité des critères (1 à 5)</label>
+        <input type="number" name="priority" id="priority" min="1" max="5" />
+
+        <label>Période de mise en œuvre :</label>
+        <label><input type="radio" name="horizon" value="court" /> Court terme (&lt; 3 mois)</label>
+        <label><input type="radio" name="horizon" value="moyen" /> Moyen terme (3–12 mois)</label>
+        <label><input type="radio" name="horizon" value="long" /> Long terme (&gt; 12 mois)</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>4. Détails Spécifiques</legend>
+        <label for="options">Options déjà envisagées</label>
+        <textarea name="options" id="options" rows="2"></textarea>
+
+        <label for="attachments">Données ou documents joints</label>
+        <input type="file" name="attachments" id="attachments" />
+
+        <label for="questions">Questions spécifiques</label>
+        <textarea name="questions" id="questions" rows="2"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>5. Canal de restitution</legend>
+        <label>Mode de réception :</label
