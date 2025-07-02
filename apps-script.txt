@@ -1,18 +1,37 @@
+/**
+ * Déploie en tant qu’Application web (Accès : Tout le monde)
+ */
 function doPost(e) {
-  var sheet = SpreadsheetApp.openById("VOTRE_ID_FEUILLE")
-              .getSheetByName("FormResponses");
+  const SHEET_ID = "VOTRE_ID_FEUILLE";
+  const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName("FormResponses");
 
-  var data = [
+  const row = [
     new Date(),
-    e.parameter.name,
+    e.parameter.fullname,
+    e.parameter.email,
     e.parameter.phone,
-    e.parameter.product,
-    e.parameter.amount
+    e.parameter.lang,
+    e.parameter.decision_title,
+    e.parameter.context,
+    e.parameter.resources,
+    e.parameter.budget,
+    e.parameter.team_size,
+    e.parameter.tools,
+    e.parameter.constraints,
+    e.parameter.criteria?.toString(),
+    e.parameter.criteria_other || "",
+    e.parameter.priority,
+    e.parameter.horizon,
+    e.parameter.options,
+    e.parameter.questions,
+    e.parameter.deliver_mode?.toString(),
+    e.parameter.format,
+    e.parameter.rgpd_consent
   ];
 
-  sheet.appendRow(data);
+  sheet.appendRow(row);
 
   return ContentService
-    .createTextOutput("Demande enregistrée avec succès")
+    .createTextOutput("Demande reçue, merci !")
     .setMimeType(ContentService.MimeType.TEXT);
 }
